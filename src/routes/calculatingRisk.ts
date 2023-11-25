@@ -8,7 +8,7 @@ interface RiskRatingResult {
 
 // API 2. Convert "Claim History" to a "Risk Rating"
 
-// This function will calculate the risk rating based on the claim history
+// This function will calculate the risk rating based on the claim history /
 export function calculateRiskRating(claimHistory: string) {
   try {
     // Check for invalid input
