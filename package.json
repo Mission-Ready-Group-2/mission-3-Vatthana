@@ -7,7 +7,7 @@
   "scripts": {
     "start": "tsc && node dist/server.js",
     "test": "mocha dist/routes/test/api.test.js",
-    "build": "tsc"
+    "build": "./node_modules/typescript/bin/tsc"
   },
   "keywords": [],
   "author": "",
