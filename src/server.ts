@@ -13,9 +13,25 @@ const port = process.env.PORT || 8080;
 // CORS
 app.use(cors());
 app.use(bodyParser.json());
-
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.send(`
+    <h1>Welcome to the Car Insurance API!</h1>
+    <p>Here are the available routes:</p>
+    <ol>
+      <li>
+        <strong>POST /calculate_car_value</strong><br>
+        Use this route to calculate the value of a car.
+      </li>
+      <li>
+        <strong>POST /calculate_risk_rating</strong><br>
+        Use this route to calculate the risk rating.
+      </li>
+      <li>
+        <strong>POST /calculate_quote</strong><br>
+        Use this route to calculate the quote.
+      </li>
+    </ol>
+  `);
 });
 // API 1. Calculate car value
 app.use("/calculate_car_value", CarValueAPI);

@@ -41,7 +41,7 @@ describe("Car Value API", () => {
     }));
     test("should handle invalid year input", () => __awaiter(void 0, void 0, void 0, function* () {
         const response = yield (0, supertest_1.default)(app).post("/calculate_car_value").send({
-            model: "Civic",
+            model: "Civic", // Valid model
             year: "invalid", // Invalid year format
         });
         expect(response.status).toBe(400);
@@ -50,7 +50,7 @@ describe("Car Value API", () => {
     }));
     test("should handle an empty model", () => __awaiter(void 0, void 0, void 0, function* () {
         const response = yield (0, supertest_1.default)(app).post("/calculate_car_value").send({
-            model: "",
+            model: "", // Empty model name
             year: "2010", // Valid year
         });
         expect(response.status).toBe(400);
@@ -59,7 +59,7 @@ describe("Car Value API", () => {
     }));
     it("should handle a negative year ", () => __awaiter(void 0, void 0, void 0, function* () {
         const response = yield (0, supertest_1.default)(app).post("/calculate_car_value").send({
-            model: "Civic",
+            model: "Civic", // Valid model
             year: -2010, // Negative year
         });
         expect(response.status).toBe(400);
