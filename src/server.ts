@@ -8,7 +8,7 @@ import dotenv from "dotenv";
 dotenv.config();
 const app = express();
 const router = express.Router();
-const port = process.env.PORT || 1337;
+const port = process.env.PORT || 8080;
 
 // CORS
 app.use(cors());

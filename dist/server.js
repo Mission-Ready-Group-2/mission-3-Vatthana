@@ -13,7 +13,7 @@ const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const router = express_1.default.Router();
-const port = process.env.PORT || 1337;
+const port = process.env.PORT || 8080;
 // CORS
 app.use((0, cors_1.default)());
 app.use(body_parser_1.default.json());
