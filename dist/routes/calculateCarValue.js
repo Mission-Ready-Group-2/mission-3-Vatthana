@@ -30,7 +30,7 @@ function calculateCarValue(model, year) {
             .map((char) => char.charCodeAt(0) - "A".charCodeAt(0) + 1)
             .reduce((acc, curr) => acc + curr, 0) *
             100 +
-            year;
+            +year;
         // Return the value as an object
         return { car_value: value };
     }
