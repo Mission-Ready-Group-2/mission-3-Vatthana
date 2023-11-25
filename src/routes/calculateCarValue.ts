@@ -4,7 +4,7 @@ const router = express.Router();
 //  API 1 - Calculate car value
 
 // This function will calculate the car value based on the model and year
-function calculateCarValue(model: string, year: number) {
+export function calculateCarValue(model: string, year: number) {
   try {
     // Remove spaces and convert the model name to uppercase
     model = model.replace(/ /g, "").toUpperCase();

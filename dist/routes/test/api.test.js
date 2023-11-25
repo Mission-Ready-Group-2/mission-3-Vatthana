@@ -1,36 +1,39 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const calculatingRisk_1 = require("../calculatingRisk");
-const chai_1 = require("chai");
-describe("calculateRiskRating", () => {
-    // TEST 1
-    it("should return the correct risk rating when claim history contains keywords", () => {
-        const claimHistory = "I had a collision and a scratch on my car in the past year.";
-        const result = (0, calculatingRisk_1.calculateRiskRating)(claimHistory);
-        (0, chai_1.expect)(result).to.deep.equal({ risk_rating: 1 });
-    });
-    // TEST 2
-    it("should return the minimum risk rating when claim history is empty", () => {
-        const claimHistory = "";
-        const result = (0, calculatingRisk_1.calculateRiskRating)(claimHistory);
-        (0, chai_1.expect)(result).to.deep.equal({ error: "Claim history cannot be empty" });
-    });
-    // TEST 4
-    it("should return the maximum risk rating when claim history contains all keywords", () => {
-        const claimHistory = "collide crash scratch bump smash collide crash scratch bump smash";
-        const result = (0, calculatingRisk_1.calculateRiskRating)(claimHistory);
-        (0, chai_1.expect)(result).to.deep.equal({ risk_rating: 5 });
-    });
-    // TEST 6
-    it("should return the correct risk rating when claim history contains only one keyword", () => {
-        const claimHistory = "scratch";
-        const result = (0, calculatingRisk_1.calculateRiskRating)(claimHistory);
-        (0, chai_1.expect)(result).to.deep.equal({ risk_rating: 1 });
-    });
-    // TEST 7
-    it("should return the correct risk rating when claim history contains repeated keywords", () => {
-        const claimHistory = "scratch scratch scratch scratch scratch";
-        const result = (0, calculatingRisk_1.calculateRiskRating)(claimHistory);
-        (0, chai_1.expect)(result).to.deep.equal({ risk_rating: 1 });
-    });
+const supertest_1 = __importDefault(require("supertest"));
+const express_1 = __importDefault(require("express"));
+const calculateCarValue_1 = __importDefault(require("../calculateCarValue")); // Replace with the actual filename
+const app = (0, express_1.default)();
+app.use(express_1.default.json());
+app.use("/car-value", calculateCarValue_1.default);
+describe("Car Value API", () => {
+    test("should calculate car value correctly", () => __awaiter(void 0, void 0, void 0, function* () {
+        const response = yield (0, supertest_1.default)(app)
+            .post("/car-value")
+            .send({ model: "Civic", year: 2000 });
+        expect(response.status).toBe(200);
+        expect(response.body).toHaveProperty("car_value");
+        expect(response.body.car_value).toBe(6600);
+    }));
+    test("should handle invalid input", () => __awaiter(void 0, void 0, void 0, function* () {
+        const response = yield (0, supertest_1.default)(app)
+            .post("/car-value")
+            .send({ model: "Invalid123", year: "invalidYear" });
+        expect(response.status).toBe(400);
+        expect(response.body).toHaveProperty("error");
+        expect(response.body.error).toBe("Year must be a number");
+    }));
+    // Add more test cases as needed
 });
