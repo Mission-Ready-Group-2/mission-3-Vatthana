@@ -35,6 +35,13 @@ jobs:
         with:
           name: node-app
           path: release.zip
+
+      - name: Upload code coverage artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: code-coverage-report
+          path: output/
+
       - name: Archive code coverage results
         uses: actions/upload-artifact@v3
         with:
