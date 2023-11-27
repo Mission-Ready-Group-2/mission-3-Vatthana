@@ -7,7 +7,7 @@
   "scripts": {
     "build": "./node_modules/typescript/bin/tsc",
     "start": "./node_modules/typescript/bin/tsc && node dist/server.js",
-    "test": "jest dist/routes/test/api.test.js"
+    "test": "jest dist/routes/test/api.test.js --coverage"
   },
   "keywords": [],
   "author": "",
